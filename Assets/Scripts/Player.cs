@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private InputManager inputManager;
     [SerializeField] private CinemachineCamera cam;
+    [SerializeField] private Transform hand;
     [SerializeField] private float speed;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float jump;
@@ -13,6 +14,7 @@ public class Player : MonoBehaviour
     private float jumpRay;
     private Rigidbody rb;
     private AimWallGrid wallGrid;
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,7 +31,7 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, cam.transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z); 
-        Debug.DrawRay(cam.transform.position, (cam.transform.forward*50f).normalized,Color.yellow);
+        Debug.DrawRay(cam.transform.position, cam.transform.forward*5f,Color.yellow);
         rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxSpeed);
     }
 
@@ -73,5 +75,10 @@ public class Player : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void Hand()
+    {
+       
     }
 }
