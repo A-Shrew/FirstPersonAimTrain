@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField] private InputManager inputManager;
     [SerializeField] private CinemachineCamera cam;
     [SerializeField] private Transform hand;
+    [SerializeField] private float gravity;
     [SerializeField] private float speed;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float jump;
@@ -33,6 +34,12 @@ public class Player : MonoBehaviour
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, cam.transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z); 
         Debug.DrawRay(cam.transform.position, cam.transform.forward*5f,Color.yellow);
         rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxSpeed);
+
+        if (!isGrounded)
+        {
+            rb.AddForce(gravity * transform.down, ForceMode.Accceleration);
+        }
+
     }
 
     // Update is called once per frame
